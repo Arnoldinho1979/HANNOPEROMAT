@@ -23,16 +23,16 @@
     }
 
     h1 {
-      font-size: 2.4rem;
+      font-size: 3.2rem; /* ÄNDERUNG: Größer */
       letter-spacing: 2px;
       margin-bottom: 0.3rem;
     }
 
     .subtitle {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: #666;
       margin: 0 auto 2rem;
-      max-width: 85%;
+      max-width: 100%; /* ÄNDERUNG: volle Breite wie Überschrift */
     }
 
     #buttons button {
@@ -58,6 +58,7 @@
       display: none;
     }
 
+    /* Fade-in Effekt für Frage */
     .fade-in {
       animation: fadeIn 0.4s ease-in-out;
     }
@@ -67,13 +68,14 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Klick-Feedback für Button */
     .button-clicked {
       animation: clickFlash 0.2s ease;
     }
 
     @keyframes clickFlash {
-      from { background-color: #ccc; }
-      to { background-color: inherit; }
+      0% { background-color: #ccc; }
+      100% { background-color: inherit; }
     }
   </style>
 </head>
@@ -83,11 +85,11 @@
     <p class="subtitle">Welche Veranstaltungen der Staatsoper Hannover passen zu mir?</p>
 
     <div id="quiz-container">
-      <p id="statement"></p>
+      <p id="statement" class="fade-in"></p>
       <div id="buttons">
-        <button onclick="handleAnswer(1)">Ja</button>
-        <button onclick="handleAnswer(2)">Nein</button>
-        <button onclick="handleAnswer(3)">Weiß nicht</button>
+        <button onclick="handleAnswer(1, event)">Ja</button>
+        <button onclick="handleAnswer(2, event)">Nein</button>
+        <button onclick="handleAnswer(3, event)">Weiß nicht</button>
       </div>
     </div>
 
@@ -134,7 +136,7 @@
     function showNextStatement() {
       if (current < statements.length) {
         statementEl.classList.remove("fade-in");
-        void statementEl.offsetWidth;
+        void statementEl.offsetWidth; // Reflow erzwingen für Animation
         statementEl.textContent = statements[current];
         statementEl.classList.add("fade-in");
       } else {
@@ -142,7 +144,7 @@
       }
     }
 
-    function handleAnswer(value) {
+    function handleAnswer(value, event) {
       const clickedButton = event.target;
       clickedButton.classList.add("button-clicked");
       setTimeout(() => clickedButton.classList.remove("button-clicked"), 200);
