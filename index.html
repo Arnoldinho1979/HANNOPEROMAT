@@ -4,133 +4,59 @@
   <meta charset="UTF-8" />
   <title>HANNOPEROMAT</title>
   <style>
-    :root {
-      --elfenbein: #f6f3ee;
-      --kohleschwarz: #2b2b2b;
-      --buehnenrot: #a7282c;
-      --goldocker: #cbb46a;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      background-color: var(--elfenbein);
-      color: var(--kohleschwarz);
+      background-color: #f6f3ee;
+      margin: 0;
+      padding: 2rem;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      padding: 3rem;
-      margin: 0;
     }
 
     .container {
-      width: 100%;
       max-width: 600px;
-      background-color: white;
-      padding: 2.5rem;
+      width: 100%;
+      background: white;
+      padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       text-align: center;
-      height: 700px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    h1 {
-      font-size: 3rem;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      color: var(--buehnenrot);
-    }
-
-    .subtitle {
-      font-size: 1rem;
-      color: var(--kohleschwarz);
-      margin-bottom: 2rem;
-    }
-
-    #quiz-container {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
     }
 
     #statement {
-      font-size: 1.1rem;
-      line-height: 1.5;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      max-width: 100%;
-      text-align: center;
-      height: 120px; /* Feste Höhe für gleichmäßige Darstellung */
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
+      font-size: 1.2rem;
+      margin: 2rem 0;
     }
 
     #buttons button {
-      padding: 0.8rem 1.4rem;
+      margin: 0.5rem;
+      padding: 0.8rem 1.2rem;
       font-size: 1rem;
-      font-weight: bold;
-      background-color: var(--goldocker);
-      color: white;
       border: none;
-      border-radius: 999px;
+      border-radius: 5px;
+      background-color: #cbb46a;
+      color: white;
       cursor: pointer;
-      transition: background-color 0.2s, transform 0.1s;
     }
 
-    #buttons button:hover {
-      background-color: var(--buehnenrot);
-    }
-
-    #buttons button:active {
-      transform: scale(0.95);
+    #result {
+      margin-top: 2rem;
     }
 
     .hidden {
       display: none;
-    }
-
-    #result {
-      margin-top: 1rem;
-    }
-
-    #result a {
-      text-decoration: none;
-      color: var(--buehnenrot);
-      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>HANNOPEROMAT</h1>
-    <p class="subtitle">Welche Veranstaltungen der Staatsoper Hannover passen zu mir?</p>
-
-    <div id="quiz-container">
-      <div id="statement">Lade Frage …</div>
-      <div id="buttons">
-        <button onclick="handleAnswer(1, event)">Ja</button>
-        <button onclick="handleAnswer(2, event)">Nein</button>
-        <button onclick="handleAnswer(3, event)">Weiß nicht</button>
-      </div>
+    <p id="statement">Lade Frage...</p>
+    <div id="buttons">
+      <button onclick="handleAnswer(1)">Ja</button>
+      <button onclick="handleAnswer(2)">Nein</button>
+      <button onclick="handleAnswer(3)">Weiß nicht</button>
     </div>
-
     <div id="result" class="hidden">
       <h2>Deine Empfehlungen:</h2>
       <ol id="recommendations"></ol>
@@ -151,23 +77,22 @@
       "Im Museum freue ich mich immer am meisten über diese extrem abstrakten Kunstwerke, die plötzlich da im Raum stehen oder am Boden liegen und angeblich eine Million Euro gekostet haben."
     ];
 
-    const resultsData = {
-      "Veranstaltung A": [1, 2, 1, 1, 1, 2, 1, 1, 1, 2],
-      "Veranstaltung B": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
-      "Veranstaltung C": [3, 3, 1, 2, 1, 3, 2, 1, 1, 3]
-    };
-
     const resultLinks = {
       "Veranstaltung A": "https://staatsoper-hannover.de/a",
       "Veranstaltung B": "https://staatsoper-hannover.de/b",
       "Veranstaltung C": "https://staatsoper-hannover.de/c"
     };
 
+    const resultsData = {
+      "Veranstaltung A": [1, 2, 1, 1, 1, 2, 1, 1, 1, 2],
+      "Veranstaltung B": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
+      "Veranstaltung C": [3, 3, 1, 2, 1, 3, 2, 1, 1, 3]
+    };
+
     let current = 0;
     let answers = [];
 
     const statementEl = document.getElementById("statement");
-    const quizContainer = document.getElementById("quiz-container");
     const resultContainer = document.getElementById("result");
     const recommendationsList = document.getElementById("recommendations");
 
@@ -179,14 +104,14 @@
       }
     }
 
-    function handleAnswer(value, event) {
+    function handleAnswer(value) {
       answers.push(value);
       current++;
       showNextStatement();
     }
 
     function showResults() {
-      quizContainer.classList.add("hidden");
+      document.getElementById("buttons").classList.add("hidden");
       resultContainer.classList.remove("hidden");
 
       const scores = {};
@@ -194,11 +119,28 @@
         const profile = resultsData[event];
         let score = 0;
         for (let i = 0; i < answers.length; i++) {
-          if (answers[i] === profile[i]) {
-            score++;
-          }
+          if (answers[i] === profile[i]) score++;
         }
         scores[event] = score;
       }
 
-      const sortedEvents = Object.entries(scores).sort((a, b) => b[1] -
+      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      recommendationsList.innerHTML = "";
+      sorted.forEach(([event]) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = resultLinks[event];
+        a.textContent = event;
+        a.target = "_blank";
+        li.appendChild(a);
+        recommendationsList.appendChild(li);
+      });
+
+      statementEl.textContent = "Danke für deine Antworten!";
+    }
+
+    // Start immediately
+    showNextStatement();
+  </script>
+</body>
+</html>
