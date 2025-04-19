@@ -61,20 +61,22 @@
       justify-content: center;
       align-items: center;
       height: 300px;
+      overflow: hidden;
     }
 
     #statement {
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      text-align: center;
       padding: 0 1rem;
       max-width: 100%;
-      line-height: 1.5;
+      line-height: 1.4;
       height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      flex-wrap: wrap;
     }
 
     #buttons {
@@ -91,22 +93,4 @@
       background-color: var(--goldocker);
       color: white;
       border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.1s;
-    }
-
-    #buttons button:hover {
-      background-color: var(--buehnenrot);
-    }
-
-    #buttons button:active {
-      transform: scale(0.95);
-    }
-
-    .button-clicked {
-      animation: clickFlash 0.2s ease;
-    }
-
-    @keyframes clickFlash {
-      0% { background-color: #bbb
+      border-radius: 
