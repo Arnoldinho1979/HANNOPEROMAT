@@ -13,7 +13,7 @@
 
     body {
       font-family: Arial, sans-serif;
-      background: var(--papierweiss);
+      background-color: var(--papierweiss);
       color: var(--kohleschwarz);
       display: flex;
       justify-content: center;
@@ -22,36 +22,36 @@
 
     .container {
       max-width: 600px;
-      background: white;
+      background-color: white;
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
 
     h1 {
-      font-size: 3.2rem;
+      font-size: 3.5rem; /* Deutlich größer */
       letter-spacing: 2px;
       margin-bottom: 0.3rem;
-      color: var(--buehnenrot);
+      color: var(--buehnenrot); /* Bühnenrot */
     }
 
     .subtitle {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--kohleschwarz);
       margin: 0 auto 2rem;
-      max-width: 100%;
+      max-width: 100%; /* Gleich breit wie Überschrift */
     }
 
     #buttons button {
       margin: 0.5rem;
-      padding: 0.8rem 1.4rem;
+      padding: 0.9rem 1.4rem;
       font-size: 1rem;
       font-weight: bold;
       background-color: var(--goldocker);
       color: white;
       border: none;
-      border-radius: 30px;
+      border-radius: 999px; /* Runde Buttons */
       cursor: pointer;
       transition: background-color 0.2s, transform 0.1s;
     }
@@ -61,7 +61,7 @@
     }
 
     #buttons button:active {
-      transform: scale(0.96);
+      transform: scale(0.95);
     }
 
     .button-clicked {
@@ -69,8 +69,8 @@
     }
 
     @keyframes clickFlash {
-      0% { background-color: #ccc; }
-      100% { background-color: inherit; }
+      0% { background-color: #bbb; }
+      100% { background-color: var(--goldocker); }
     }
 
     .fade-in {
@@ -78,8 +78,14 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     #result a {
