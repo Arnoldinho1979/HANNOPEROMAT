@@ -22,18 +22,18 @@
       text-align: center;
     }
 
-h1 {
-  font-size: 2.4rem; /* NEU: größer */
-  letter-spacing: 2px;
-  margin-bottom: 0.3rem;
-}
+    h1 {
+      font-size: 2.4rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.3rem;
+    }
 
     .subtitle {
-  font-size: 0.95rem;
-  color: #666;
-  margin: 0 auto 2rem;
-  max-width: 85%;
-}
+      font-size: 0.95rem;
+      color: #666;
+      margin: 0 auto 2rem;
+      max-width: 85%;
+    }
 
     #buttons button {
       margin: 0.5rem;
@@ -56,6 +56,24 @@ h1 {
 
     .hidden {
       display: none;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .button-clicked {
+      animation: clickFlash 0.2s ease;
+    }
+
+    @keyframes clickFlash {
+      from { background-color: #ccc; }
+      to { background-color: inherit; }
     }
   </style>
 </head>
@@ -115,16 +133,23 @@ h1 {
 
     function showNextStatement() {
       if (current < statements.length) {
+        statementEl.classList.remove("fade-in");
+        void statementEl.offsetWidth;
         statementEl.textContent = statements[current];
+        statementEl.classList.add("fade-in");
       } else {
         showResults();
       }
     }
 
     function handleAnswer(value) {
+      const clickedButton = event.target;
+      clickedButton.classList.add("button-clicked");
+      setTimeout(() => clickedButton.classList.remove("button-clicked"), 200);
+
       answers.push(value);
       current++;
-      setTimeout(showNextStatement, 400); // Verzögerung für Eleganz
+      setTimeout(showNextStatement, 400);
     }
 
     function showResults() {
