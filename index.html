@@ -51,7 +51,6 @@
       font-size: 1rem;
       color: var(--kohleschwarz);
       margin-bottom: 2rem;
-      max-width: 100%;
     }
 
     #quiz-container {
@@ -61,22 +60,16 @@
       justify-content: center;
       align-items: center;
       height: 300px;
-      overflow: hidden;
     }
 
     #statement {
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      text-align: center;
       padding: 0 1rem;
       max-width: 100%;
-      line-height: 1.4;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      line-height: 1.5;
+      text-align: center;
+      min-height: 100px; /* <-- fix: damit es Platz reserviert */
     }
 
     #buttons {
@@ -93,4 +86,59 @@
       background-color: var(--goldocker);
       color: white;
       border: none;
-      border-radius: 
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    #buttons button:hover {
+      background-color: var(--buehnenrot);
+    }
+
+    #buttons button:active {
+      transform: scale(0.95);
+    }
+
+    .button-clicked {
+      animation: clickFlash 0.2s ease;
+    }
+
+    @keyframes clickFlash {
+      0% { background-color: #bbb; }
+      100% { background-color: var(--goldocker); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #result {
+      margin-top: 1rem;
+    }
+
+    #result a {
+      text-decoration: none;
+      color: var(--buehnenrot);
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>HANNOPEROMAT</h1>
+    <p class="subtitle">Welche Veranstaltungen der Staatsoper Hannover passen zu mir?</p>
+
+    <div id="quiz-container">
+      <p id="statement" class="fade-in">Lade Fragen …</p>
+      <div id="buttons">
+        <button onclick="handleAnswer(1, event)">Ja</button>
+        <button onclick
