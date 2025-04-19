@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>HANNOPEROMAT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>HANNOPEROMAT</h1>
+    <p class="subtitle">Welche Veranstaltungen der Staatsoper Hannover passen zu mir?</p>
+
+    <div id="quiz-container">
+      <p id="statement"></p>
+      <div id="buttons">
+        <button onclick="handleAnswer(1)">Ja</button>
+        <button onclick="handleAnswer(2)">Nein</button>
+        <button onclick="handleAnswer(3)">Weiß nicht</button>
+      </div>
+    </div>
+
+    <div id="result" class="hidden">
+      <h2>Deine Empfehlungen:</h2>
+      <ol id="recommendations"></ol>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
