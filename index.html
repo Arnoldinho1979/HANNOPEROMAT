@@ -6,9 +6,9 @@
   <style>
     :root {
       --buehnenrot: #a7282c;
+      --goldocker: #c9a94e;
       --elfenbein: #f6f3ee;
-      --kohleschwarz: #2b2b2b;
-      --goldocker: #cbb46a;
+      --kohleschwarz: #1a1a1a;
     }
 
     * {
@@ -16,60 +16,53 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
       background-color: var(--elfenbein);
-      color: var(--kohleschwarz);
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 3rem;
-      margin: 0;
+      min-height: 100vh;
     }
 
     .container {
-      width: 100%;
+      background-color: white;
+      color: var(--kohleschwarz);
       max-width: 700px;
-      min-height: 600px;
-      background: white;
-      padding: 3rem 2rem;
+      width: 100%;
+      padding: 2.5rem;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .title-block {
-      max-width: 500px;
-      margin: 0 auto 1rem auto;
+      align-items: center;
+      min-height: 600px;
     }
 
     h1 {
-      letter-spacing: 2px;
-      font-size: 2.8rem;
-      margin-bottom: 0.3rem;
-      color: var(--buehnenrot);
+      font-size: 3rem;
+      margin: 0;
+      margin-bottom: 0.4rem;
+      color: var(--kohleschwarz);
+      text-align: center;
     }
 
     .subtitle {
       font-size: 1rem;
       color: var(--kohleschwarz);
-      margin-bottom: 0.8rem;
-    }
-
-    #quiz-container {
-      flex-grow: 1;
+      text-align: center;
+      margin-bottom: 2rem;
+      max-width: 500px;
     }
 
     #statement {
       font-size: 1.2rem;
+      text-align: center;
       margin-bottom: 2rem;
-      padding: 0 1rem;
-      min-height: 60px;
-      word-break: break-word;
+      min-height: 4rem;
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.6s ease;
     }
 
     #statement.visible {
@@ -78,35 +71,42 @@
 
     #buttons {
       display: flex;
-      justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
-    #buttons button {
-      padding: 0.8rem 1.4rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
+    #buttons button,
+    #restart-button {
       background-color: var(--goldocker);
       color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 0.8rem 1.6rem;
+      font-size: 1rem;
       font-weight: bold;
-      transition: background-color 0.2s;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
-    #buttons button:hover {
+    #buttons button:hover,
+    #restart-button:hover {
       background-color: var(--buehnenrot);
     }
 
     #result {
       margin-top: 2rem;
+      text-align: center;
     }
 
     #result a {
-      text-decoration: none;
       color: var(--buehnenrot);
+      text-decoration: none;
       font-weight: bold;
+    }
+
+    #restart-button {
+      margin-top: 2rem;
     }
 
     .hidden {
@@ -116,10 +116,8 @@
 </head>
 <body>
   <div class="container">
-    <div class="title-block">
-      <h1>HANNOPEROMAT</h1>
-      <p class="subtitle">Welche Veranstaltungen der Staatsoper Hannover passen zu mir?</p>
-    </div>
+    <h1>HANNOPEROMAT</h1>
+    <p class="subtitle">Welche Veranstaltungen der Staatsoper Hannover passen zu mir?</p>
 
     <div id="quiz-container">
       <p id="statement"></p>
@@ -133,6 +131,7 @@
     <div id="result" class="hidden">
       <h2>Deine Empfehlungen:</h2>
       <ol id="recommendations"></ol>
+      <button id="restart-button" onclick="restart()">Noch einmal spielen</button>
     </div>
   </div>
 
@@ -176,7 +175,7 @@
         setTimeout(() => {
           statementEl.textContent = statements[current];
           statementEl.classList.add("visible");
-        }, 300);
+        }, 100);
       } else {
         showResults();
       }
@@ -185,7 +184,7 @@
     function handleAnswer(value) {
       answers.push(value);
       current++;
-      setTimeout(showNextStatement, 300);
+      setTimeout(showNextStatement, 400);
     }
 
     function showResults() {
@@ -215,6 +214,10 @@
       });
 
       resultContainer.classList.remove("hidden");
+    }
+
+    function restart() {
+      location.reload(); // Seite neu laden
     }
 
     showNextStatement();
