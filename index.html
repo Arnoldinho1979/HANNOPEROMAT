@@ -176,24 +176,54 @@
       "Ich liebe Filme wie „Star Wars. Episode IV“, „Superman“ oder „Hook“.",
       "Im Museum freue ich mich immer am meisten über diese extrem abstrakten Kunstwerke, die plötzlich da im Raum stehen oder am Boden liegen und angeblich eine Million Euro gekostet haben."
     ];
+const resultsData = {
+  "Erstes Sinfoniekonzert": [1, 3, 2, 2, 2, 1, 1, 2, 1, 1],
+  "Zweites Sinfoniekonzert": [3, 3, 2, 2, 1, 1, 3, 2, 1, 1],
+  "Drittes Sinfoniekonzert": [3, 1, 2, 2, 3, 1, 1, 2, 3, 1],
+  "Viertes Sinfoniekonzert": [2, 1, 2, 2, 1, 1, 3, 2, 1, 2],
+  "Fünftes Sinfoniekonzert": [3, 2, 2, 2, 3, 1, 1, 2, 1, 3],
+  "Sechstes Sinfoniekonzert": [1, 2, 2, 2, 1, 1, 2, 2, 1, 2],
+  "Siebtes Sinfoniekonzert": [1, 3, 2, 2, 2, 1, 1, 2, 3, 3],
+  "Achtes Sinfoniekonzert": [1, 2, 2, 2, 1, 1, 3, 2, 1, 3],
+  "Erstes Kammerkonzert": [2, 1, 1, 2, 1, 1, 1, 2, 2, 3],
+  "Zweites Kammerkonzert": [2, 1, 1, 2, 1, 1, 2, 2, 2, 2],
+  "Drittes Kammerkonzert": [2, 3, 1, 2, 2, 1, 3, 2, 2, 2],
+  "Viertes Kammerkonzert": [1, 2, 1, 2, 2, 1, 1, 2, 2, 1],
+  "Fünftes Kammerkonzert": [2, 3, 1, 2, 3, 1, 1, 2, 2, 2],
+  "Sechstes Kammerkonzert": [2, 3, 1, 2, 2, 1, 1, 2, 2, 3],
+  "Siebtes Kammerkonzert": [3, 3, 1, 3, 3, 1, 1, 2, 2, 1],
+  "Achtes Kammerkonzert": [2, 1, 1, 2, 2, 1, 1, 2, 2, 2],
+  "Komponistinnen 2 x hören. Erste Ausgabe": [2, 3, 1, 2, 1, 2, 1, 2, 2, 1],
+  "Komponistinnen 2 x hören. Zweite Ausgabe": [2, 1, 1, 2, 1, 2, 1, 2, 2, 2],
+  "Komponistinnen 2 x hören. Dritte Ausgabe": [2, 1, 1, 2, 1, 2, 1, 2, 2, 2],
+  "Lied.Konzert am 20.11.25": [2, 3, 2, 2, 2, 1, 2, 3, 2, 2],
+  "Guides to reality": [2, 2, 1, 2, 1, 2, 1, 2, 2, 1]
+};
 
-    const resultsData = {
-      "Erstes Sinfoniekonzert": [1, 3, 2, 2, 2, 1, 1, 2, 1, 1],
-      "Zweites Sinfoniekonzert": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
-      "Drittes Sinfoniekonzert": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
-      "Viertes Sinfoniekonzert": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
-      "Fünftes Sinfoniekonzert": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
-      "Sechstes Sinfoniekonzert": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
-      "Siebtes Sinfoniekonzert": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
-      "Achtes Sinfoniekonzert": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
-      "Drittes Sinfoniekonzert": [3, 3, 1, 2, 1, 3, 2, 1, 1, 3]
-    };
+const resultLinks = {
+  "Erstes Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Zweites Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Drittes Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Viertes Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Fünftes Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Sechstes Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Siebtes Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Achtes Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Erstes Kammerkonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Zweites Kammerkonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Drittes Kammerkonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Viertes Kammerkonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Fünftes Kammerkonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Sechstes Kammerkonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Siebtes Kammerkonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Achtes Kammerkonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Komponistinnen 2 x hören. Erste Ausgabe": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Komponistinnen 2 x hören. Zweite Ausgabe": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Komponistinnen 2 x hören. Dritte Ausgabe": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Lied.Konzert am 20.11.25": "https://staatstheater-hannover.de/ru_RU/staatsoper",
+  "Guides to reality": "https://staatstheater-hannover.de/ru_RU/staatsoper"
+};
 
-    const resultLinks = {
-      "Erstes Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
-      "Zweites Sinfoniekonzert": "https://staatstheater-hannover.de/ru_RU/staatsoper",
-      "Veranstaltung C": "https://staatstheater-hannover.de/ru_RU/staatsoper"
-    };
 
     let current = 0;
     let answers = [];
