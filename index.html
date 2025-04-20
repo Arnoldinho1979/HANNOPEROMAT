@@ -6,9 +6,9 @@
   <style>
     :root {
       --buehnenrot: #a7282c;
+      --goldocker: #c9a94e;
       --elfenbein: #f6f3ee;
-      --kohleschwarz: #2b2b2b;
-      --goldocker: #cbb46a;
+      --kohleschwarz: #1a1a1a;
     }
 
     * {
@@ -16,60 +16,53 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
       background-color: var(--elfenbein);
-      color: var(--kohleschwarz);
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 3rem;
-      margin: 0;
+      min-height: 100vh;
     }
 
     .container {
-      width: 100%;
+      background-color: white;
+      color: var(--kohleschwarz);
       max-width: 700px;
-      min-height: 600px;
-      background: white;
-      padding: 3rem 2rem;
+      width: 100%;
+      padding: 2.5rem;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .title-block {
-      max-width: 500px;
-      margin: 0 auto 1rem auto;
+      align-items: center;
+      min-height: 600px;
     }
 
     h1 {
-      letter-spacing: 2px;
-      font-size: 2.8rem;
+      font-size: 3rem;
+      margin: 0;
       margin-bottom: 0.3rem;
-      color: var(--buehnenrot);
+      color: var(--kohleschwarz);
+      text-align: center;
     }
 
     .subtitle {
       font-size: 1rem;
       color: var(--kohleschwarz);
-      margin-bottom: 0.8rem;
-    }
-
-    #quiz-container {
-      flex-grow: 1;
+      text-align: center;
+      margin-bottom: 2rem;
+      max-width: 500px;
     }
 
     #statement {
       font-size: 1.2rem;
+      text-align: center;
       margin-bottom: 2rem;
-      padding: 0 1rem;
-      min-height: 60px;
-      word-break: break-word;
+      min-height: 4rem;
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.6s ease;
     }
 
     #statement.visible {
@@ -78,146 +71,18 @@
 
     #buttons {
       display: flex;
-      justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     #buttons button {
-      padding: 0.8rem 1.4rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
       background-color: var(--goldocker);
       color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 0.8rem 1.6rem;
+      font-size: 1rem;
       font-weight: bold;
-      transition: background-color 0.2s;
-    }
-
-    #buttons button:hover {
-      background-color: var(--buehnenrot);
-    }
-
-    #result {
-      margin-top: 2rem;
-    }
-
-    #result a {
-      text-decoration: none;
-      color: var(--buehnenrot);
-      font-weight: bold;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="title-block">
-      <h1>HANNOPEROMAT</h1>
-      <p class="subtitle">Welche Veranstaltungen der Staatsoper Hannover passen zu mir?</p>
-    </div>
-
-    <div id="quiz-container">
-      <p id="statement"></p>
-      <div id="buttons">
-        <button onclick="handleAnswer(1)">Ja</button>
-        <button onclick="handleAnswer(2)">Nein</button>
-        <button onclick="handleAnswer(3)">Weiß nicht</button>
-      </div>
-    </div>
-
-    <div id="result" class="hidden">
-      <h2>Deine Empfehlungen:</h2>
-      <ol id="recommendations"></ol>
-    </div>
-  </div>
-
-  <script>
-    const statements = [
-      "Fünfeinhalbstündige Filme auf arte: kein Problem für mich!",
-      "Krasse menschliche Emotionen zu erleben: Das ist mir zum Teil sehr unangenehm …",
-      "Ich würde einen kleinen Club immer der großen Event-Halle vorziehen. Immer!",
-      "Bei den Übertragungen der Olympischen Winterspiele freue ich mich immer am meisten auf Eiskunstlauf.",
-      "Ich lache gerne und viel. Eine Drama-Serie braucht immer auch ein bisschen Comedy!",
-      "Der größte Horror wäre für mich, von einem Comedian auf der Bühne im Publikum sitzend angesprochen zu werden.",
-      "Ich mag es, oft neue Restaurants oder Bars auszuprobieren – und daheim bin ich auch immer auf der Suche nach neuen, originellen Rezepten.",
-      "Wenn ich Filme und Serien schaue, dann eigentlich fast immer in Originalsprache mit Untertiteln!",
-      "Ich liebe Filme wie Star Wars. Episode IV, Superman oder Hook.",
-      "Im Museum freue ich mich immer am meisten über diese extrem abstrakten Kunstwerke, die plötzlich da im Raum stehen oder am Boden liegen und angeblich eine Million Euro gekostet haben."
-    ];
-
-    const resultsData = {
-      "Veranstaltung A": [1, 2, 1, 1, 1, 2, 1, 1, 1, 2],
-      "Veranstaltung B": [2, 1, 2, 1, 2, 1, 1, 3, 2, 1],
-      "Veranstaltung C": [3, 3, 1, 2, 1, 3, 2, 1, 1, 3]
-    };
-
-    const resultLinks = {
-      "Veranstaltung A": "https://staatsoper-hannover.de/a",
-      "Veranstaltung B": "https://staatsoper-hannover.de/b",
-      "Veranstaltung C": "https://staatsoper-hannover.de/c"
-    };
-
-    let current = 0;
-    let answers = [];
-
-    const statementEl = document.getElementById("statement");
-    const quizContainer = document.getElementById("quiz-container");
-    const resultContainer = document.getElementById("result");
-    const recommendationsList = document.getElementById("recommendations");
-
-    function showNextStatement() {
-      if (current < statements.length) {
-        statementEl.classList.remove("visible");
-        setTimeout(() => {
-          statementEl.textContent = statements[current];
-          statementEl.classList.add("visible");
-        }, 300);
-      } else {
-        showResults();
-      }
-    }
-
-    function handleAnswer(value) {
-      answers.push(value);
-      current++;
-      setTimeout(showNextStatement, 300);
-    }
-
-    function showResults() {
-      quizContainer.classList.add("hidden");
-      const scores = {};
-
-      for (const [title, pattern] of Object.entries(resultsData)) {
-        let score = 0;
-        for (let i = 0; i < answers.length; i++) {
-          if (answers[i] === pattern[i]) {
-            score++;
-          }
-        }
-        scores[title] = score;
-      }
-
-      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-
-      sorted.slice(0, 3).forEach(([title]) => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = resultLinks[title];
-        a.textContent = title;
-        a.target = "_blank";
-        li.appendChild(a);
-        recommendationsList.appendChild(li);
-      });
-
-      resultContainer.classList.remove("hidden");
-    }
-
-    showNextStatement();
-  </script>
-</body>
-</html>
+      cursor: pointer;
+      transition: background-color 0.3s ease
