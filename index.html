@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>HANNOPEROMAT</title>
   <style>
     :root {
@@ -32,8 +32,8 @@
       min-height: 600px;
       background: white;
       padding: 3rem 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -42,12 +42,12 @@
 
     .title-block {
       max-width: 500px;
-      margin: 0 auto 2rem auto;
+      margin: 0 auto 1rem auto;
     }
 
     h1 {
       letter-spacing: 2px;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 0.3rem;
       color: var(--buehnenrot);
     }
@@ -55,7 +55,7 @@
     .subtitle {
       font-size: 1rem;
       color: var(--kohleschwarz);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
     }
 
     #quiz-container {
@@ -63,15 +63,16 @@
     }
 
     #statement {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-bottom: 2rem;
-      word-break: break-word;
       padding: 0 1rem;
+      min-height: 60px;
+      word-break: break-word;
       opacity: 0;
-      transition: opacity 0.4s ease-in;
+      transition: opacity 0.5s ease;
     }
 
-    #statement.fade-in {
+    #statement.visible {
       opacity: 1;
     }
 
@@ -88,18 +89,24 @@
       border: none;
       border-radius: 999px;
       cursor: pointer;
-      transition: background-color 0.2s;
       background-color: var(--goldocker);
       color: white;
+      font-weight: bold;
+      transition: background-color 0.2s;
     }
 
     #buttons button:hover {
       background-color: var(--buehnenrot);
     }
 
+    #result {
+      margin-top: 2rem;
+    }
+
     #result a {
       text-decoration: none;
       color: var(--buehnenrot);
+      font-weight: bold;
     }
 
     .hidden {
@@ -165,11 +172,11 @@
 
     function showNextStatement() {
       if (current < statements.length) {
-        statementEl.classList.remove("fade-in");
+        statementEl.classList.remove("visible");
         setTimeout(() => {
           statementEl.textContent = statements[current];
-          statementEl.classList.add("fade-in");
-        }, 200); // Verzögerung für Eleganz
+          statementEl.classList.add("visible");
+        }, 300);
       } else {
         showResults();
       }
@@ -178,7 +185,7 @@
     function handleAnswer(value) {
       answers.push(value);
       current++;
-      setTimeout(showNextStatement, 400);
+      setTimeout(showNextStatement, 300);
     }
 
     function showResults() {
