@@ -265,33 +265,47 @@ const resultLinks = Object.fromEntries(
       setTimeout(showNextStatement, 800);
     }
 
-    function showResults() {
-      quizContainer.classList.add("hidden");
-      const scores = {};
+function showResults() {
+  quizContainer.classList.add("hidden");
+  const scores = {};
 
-      for (const [title, pattern] of Object.entries(resultsData)) {
-        let score = 0;
-        for (let i = 0; i < answers.length; i++) {
-          if (answers[i] === pattern[i]) {
-            score++;
-          }
-        }
-        scores[title] = score;
+  for (const [title, pattern] of Object.entries(resultsData)) {
+    let score = 0;
+    for (let i = 0; i < answers.length; i++) {
+      if (answers[i] === pattern[i]) {
+        score++;
       }
+    }
+    scores[title] = score;
+  }
 
-      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
 
-      sorted.slice(0, 3).forEach(([title]) => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = resultLinks[title];
-        a.textContent = title;
-        a.target = "_blank";
-        li.appendChild(a);
-        recommendationsList.appendChild(li);
-      });
+  const selected = [];
+  const usedBaseTitles = new Set();
 
-      resultContainer.classList.remove("hidden");
+  for (const [title] of sorted) {
+    const baseTitle = title.replace(/^(Erstes|Zweites|Drittes|Viertes|Fünftes|Sechstes|Siebtes|Achtes)\s/, "");
+    if (!usedBaseTitles.has(baseTitle)) {
+      selected.push(title);
+      usedBaseTitles.add(baseTitle);
+    }
+    if (selected.length === 3) break;
+  }
+
+  selected.forEach(title => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = resultLinks[title];
+    a.textContent = title;
+    a.target = "_blank";
+    li.appendChild(a);
+    recommendationsList.appendChild(li);
+  });
+
+  resultContainer.classList.remove("hidden");
+}
+
     }
 
     function restart() {
